@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>For You — I'm Sorry 🧸</title>
+<style>
+:root{--rose:#d87996;--deep:#92566c;--ink:#59464d;--pink:#fff0f4;--line:#f1d9e1}*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(145deg,#fffaf8,#fff0f5);color:var(--ink);font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif}
+header{max-width:1000px;margin:auto;padding:22px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{font-weight:900;color:var(--deep)}.brand span{color:var(--rose)}nav{display:flex;gap:5px;flex-wrap:wrap}
+nav button{border:0;background:transparent;color:#8d6d79;padding:10px 12px;border-radius:999px;font:inherit;cursor:pointer}
+nav button.active,nav button:hover{background:#f9e2e9;color:var(--deep)}
+main{max-width:900px;margin:12px auto 45px;padding:0 18px}.page{display:none;animation:fade .3s}.page.active{display:block}
+.panel{background:#ffffffdf;border:1px solid var(--line);border-radius:28px;padding:clamp(22px,5vw,42px);box-shadow:0 18px 55px #bd7b8b12;text-align:center}
+.eyebrow{text-transform:uppercase;letter-spacing:.17em;font-size:.72rem;font-weight:900;color:#b8788d}
+h1{font-size:clamp(2.3rem,7vw,4rem);line-height:1.02;letter-spacing:-.05em;color:var(--deep);margin:14px 0}h2{color:var(--deep);font-size:clamp(1.7rem,4vw,2.3rem);margin:10px 0}
+p{line-height:1.8;color:#79666d}.lead{max-width:620px;margin:auto}
+.primary,.secondary{font:inherit;font-weight:850;border:0;border-radius:999px;padding:14px 22px;cursor:pointer;transition:transform .22s,background .22s;min-height:48px}
+.primary{background:var(--rose);color:white;box-shadow:0 8px 18px #d8799635;transform:scale(var(--scale,1))}.primary:hover{background:#c86483}
+.secondary{background:#fff0f4;color:#956779;border:1px solid var(--line)}.actions{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:22px}
+.bear-stage{height:180px;display:grid;place-items:center;position:relative;margin:12px auto}.bear{width:135px;height:125px;position:relative;animation:float 3s ease-in-out infinite}
+.ear{position:absolute;top:0;width:43px;height:43px;background:#c99a78;border:5px solid #b98768;border-radius:50%}.ear:after{content:"";position:absolute;inset:7px;background:#f1c5c5;border-radius:50%}.left-ear{left:5px}.right-ear{right:5px}
+.head{position:absolute;left:12px;top:15px;width:111px;height:102px;background:#d9ae8b;border:5px solid #b98768;border-radius:48% 48% 45% 45%;z-index:2}
+.eye{position:absolute;top:42px;width:7px;height:10px;background:#4b3c42;border-radius:50%;z-index:4}.eye.l{left:29px}.eye.r{right:29px}
+.muzzle{position:absolute;left:42px;top:57px;width:29px;height:22px;background:#f8e8d9;border-radius:50%;z-index:4}.nose{position:absolute;left:53px;top:62px;width:8px;height:6px;background:#67434a;border-radius:50%;z-index:5}
+.tear{position:absolute;top:61px;width:9px;height:14px;background:#83c9e7;border-radius:60% 40% 65% 35%;z-index:6;animation:tear 1.8s infinite}.tear.l{left:30px}.tear.r{right:30px;animation-delay:.5s}
+.heart{position:absolute;font-size:24px;animation:heart 2.4s infinite}.heart.a{left:calc(50% - 115px);top:24px}.heart.b{right:calc(50% - 120px);top:55px;animation-delay:.7s}
+.note{background:#fff5f7;border:1px dashed #e9b8c8;border-radius:18px;padding:20px;text-align:left;line-height:1.8;max-width:650px;margin:20px auto}.note strong{color:#9a5b72}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:24px;text-align:left}.memory{border:1px solid var(--line);background:#fff8fa;border-radius:20px;overflow:hidden;min-width:0}
+.photo{width:100%;aspect-ratio:4/3;object-fit:cover;background:#f9e5eb;display:block}.placeholder{aspect-ratio:4/3;display:grid;place-items:center;text-align:center;background:linear-gradient(135deg,#fce7ed,#fff6f7);font-size:2.5rem}
+.caption{padding:13px}.caption input[type=text]{width:100%;border:1px solid #edd3dc;border-radius:10px;padding:9px;font:inherit;font-size:.86rem;background:white;color:var(--ink)}.caption input[type=file]{width:100%;font-size:.75rem;margin-top:8px;color:#8c6b77}
+.caption small{display:block;color:#aa8b96;margin-top:7px;line-height:1.4}.tip{font-size:.85rem;background:#fff4f7;border-radius:14px;padding:12px 15px;margin:18px auto 0;max-width:650px}
+.note-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:22px;text-align:left}.note-card{background:#fff5f7;border:1px solid var(--line);border-radius:18px;padding:20px;line-height:1.7}.note-card span{font-size:1.5rem}.note-card strong{display:block;color:var(--deep);margin:6px 0}
+#response{margin:22px auto 0;max-width:600px;background:#fff3f7;border-radius:20px;padding:22px;animation:fade .4s}.hidden{display:none!important}
+footer{text-align:center;color:#b08b98;font-size:.78rem;padding:10px 20px 30px}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-8px) rotate(2deg)}}@keyframes tear{0%,100%{opacity:.35;translate:0 0}50%{opacity:1;translate:0 9px}}@keyframes heart{0%,100%{transform:translateY(0) scale(1);opacity:.7}50%{transform:translateY(-10px) scale(1.15);opacity:1}}@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:650px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.note-cards{grid-template-columns:1fr}}@media(max-width:390px){.grid{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+    <div class="brand">a little note <span>♡</span>
+    </div>
+    <nav aria-label="Website pages">
+        <button class="active" data-page="home">Home</button>
+        <button data-page="memories">Our memories</button>
+        <button data-page="notes">Little notes</button>
+        <button data-page="forgive">Forgive me?</button>
+    </nav>
+</header>
+<main>
+    <section id="home" class="page active">
+        <div class="panel">
+            <div class="eyebrow">a little note from me to you</div>
+            <h1>I'm really sorry 🥺</h1>
+            <p class="lead">Hey you… I know I messed up, and I hate that I have hurt you. Before anything else, I want you to remember how much our friendship means to me.</p>
+            <div class="bear-stage">
+                <span class="heart a">♡</span>
+                <span class="heart b">♡</span>
+                <div class="bear">
+                    <div class="ear left-ear"></div>
+                    <div class="ear right-ear"></div>
+                    <div class="head">
+                        <div class="eye l"></div>
+                        <div class="eye r"></div>
+                        <div class="tear l"></div>
+                        <div class="tear r"></div>
+                        <div class="muzzle"></div>
+                        <div class="nose"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="note">
+                <strong>From my heart 💌</strong><br>
+                I'm sorry for what I said and did. You matter to me more than my ego. I can't undo the moment, but I can listen, learn, and do better. You don't have to forgive me right away — I just wanted you to know that I genuinely care and will always do the same.🧸<br> 
+                I felt genuinely guilty about whatever was done that the heated moment but I assure you one thing forever that until I am alive I won't repeat this mistake again forever.... <br>
+                <b>I am genuinely very very shamefull for the words written and said.</b>
+            </div>
+            <div class="actions">
+                <button class="primary" onclick="showPage('memories')">Remember our moments →</button>
+            </div>
+        </div>
+    </section>
+    <section id="memories" class="page">
+        <div class="panel">
+            <div class="eyebrow">little moments, big meaning</div>
+            <h2>Our memories 📸</h2>
+            <p class="lead">The random laughs, silly pictures, unforgettable days, and tiny moments that became special because we shared them.</p>
+            <B>Choose from your gallery and share a screenshot to me..</B>
+            <div class="grid">
+                <article class="memory">
+                    <div class="placeholder" id="ph1">📷💗</div>
+                    <div class="caption">
+                        <input type="text" value="Our favourite moment" aria-label="Caption memory 1">
+                        <input type="file" accept="image/*" aria-label="Upload photo 1" onchange="previewPhoto(this,'ph1')">
+                        <small>Add a photo you both love.</small>
+                    </div>
+                </article>
+                <article class="memory">
+                    <div class="placeholder" id="ph2">🧸✨</div>
+                    <div class="caption">
+                        <input type="text" value="The silly laughs" aria-label="Caption memory 2">
+                        <input type="file" accept="image/*" aria-label="Upload photo 2" onchange="previewPhoto(this,'ph2')">
+                        <small>A memory that still makes you smile.</small>
+                    </div>
+                </article>
+                <article class="memory">
+                    <div class="placeholder" id="ph3">🌷☁️</div>
+                    <div class="caption">
+                        <input type="text" value="A day to remember" aria-label="Caption memory 3">
+                        <input type="file" accept="image/*" aria-label="Upload photo 3" onchange="previewPhoto(this,'ph3')">
+                        <small>One of those days you keep close.</small>
+                    </div>
+                </article>
+                <article class="memory">
+                    <div class="placeholder" id="ph4"></div>
+                    <div class="caption">
+                        <input type="text" value="Always in my heart" aria-label="Caption memory 4">
+                        <input type="file" accept="image/*" aria-label="Upload photo 4" onchange="previewPhoto(this,'ph4')">
+                        <small>Something small but meaningful.</small>
+                    </div>
+                </article>
+                <article class="memory">
+                    <div class="placeholder" id="ph5">🍰🎀</div>
+                    <div class="caption">
+                        <input type="text" value="Our little traditions" aria-label="Caption memory 5"><input type="file" accept="image/*" aria-label="Upload photo 5" onchange="previewPhoto(this,'ph5')">
+                        <small>A tradition worth keeping.</small>
+                    </div>
+                </article>
+                <article class="memory">
+                    <div class="placeholder" id="ph6">💌🐻</div>
+                    <div class="caption">
+                        <input type="text" value="More memories ahead" aria-label="Caption memory 6"><input type="file" accept="image/*" aria-label="Upload photo 6" onchange="previewPhoto(this,'ph6')">
+                        <small>Hopefully, many more happy days.</small>
+                    </div>
+                </article>
+            </div>
+            <p class="tip">💡 Choose photos from your device and edit the captions. Photos preview in this browser only; they are not uploaded to a server.</p>
+            <div class="actions">
+                <button class="primary" onclick="showPage('notes')">A few more words →</button>
+            </div>
+        </div>
+    </section>
+    <section id="notes" class="page">
+        <div class="panel">
+            <div class="eyebrow">things I don't say enough</div>
+            <h2>Little notes for you 💌</h2>
+            <p class="lead">Some things I hope you never forget, even when I'm not very good at showing them.</p>
+            <div class="note-cards">
+                <div class="note-card">
+                    <span>🌷</span>
+                    <strong>You matter to me</strong>Not just on the easy days. Your place in my life is important, and I don't take it for granted.
+                </div>
+                <div class="note-card">
+                    <span>🤗</span>
+                    <strong>Your feelings matter</strong>I want to understand how you felt, not argue with you about it. I'm ready to listen.
+                </div>
+                <div class="note-card">
+                    <span>🧸</span>
+                    <strong>A tiny teddy promise</strong>I'll try to be more thoughtful, own my mistakes, and show you through actions—not only words.
+                </div>
+                <div class="note-card">
+                    <span>☁️</span>
+                    <strong>No pressure, okay?</strong>You can take your time. I'm saying sorry because I mean it, not because I expect an instant answer.
+                </div>
+            </div>
+            <div class="note">
+                <strong>One last thing…</strong><br>
+                I'd never want one bad moment to erase all the good we've shared. Whenever you're ready, I'd love a chance to make things right. 💗
+            </div>
+            <div class="actions">
+                <button class="secondary" onclick="showPage('memories')">← Our memories</button>
+                <button class="primary" onclick="showPage('forgive')">One little question →</button>
+            </div>
+        </div>
+    </section>
+    <section id="forgive" class="page">
+        <div class="panel">
+            <div class="eyebrow">The most important question</div>
+            <h2>Can you forgive me? 🥺</h2>
+            <p class="lead">This little teddy is hoping for a second chance… but your feelings matter, so take your time.</p>
+            <div class="bear-stage">
+                <span class="heart a">♡</span>
+                <span class="heart b">♡</span>
+                <div class="bear">
+                    <div class="ear left-ear"></div>
+                    <div class="ear right-ear"></div>
+                    <div class="head">
+                        <div class="eye l"></div>
+                        <div class="eye r"></div>
+                        <div class="tear l"></div>
+                        <div class="tear r"></div>
+                        <div class="muzzle"></div>
+                        <div class="nose"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="primary" id="yesBtn" onclick="forgive()">
+                    🙏🏻 Please forgive me</button>
+                <button class="secondary" id="noBtn" onclick="notYet()">
+                    Not yet 🙈</button>
+            </div>
+            <div id="response" class="hidden" aria-live="polite">
+                <h2>Thank you for hearing me 💗</h2>
+                <p>Sending you the biggest virtual teddy-bear hug. 🧸 
+                    Whatever you need, I'll respect your feelings and try to do better.</p>
+                <div style="font-size:1.8rem">🧸 💗 💗 🧸</div>
+            </div>
+            <div class="actions">
+                <button class="secondary" onclick="showPage('notes')">← Read my notes</button>
+                <button class="secondary" onclick="showPage('home')">Back to start ↺</button>
+            </div>
+        </div>
+    </section>
+</main>
+<footer>Made with a soft heart and lots of apologies 
+    <span style="color:#d87996">♥</span>
+</footer>
+<script>
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+function previewPhoto(input,id){const file=input.files&&input.files[0];if(!file||!file.type.startsWith('image/'))return;const url=URL.createObjectURL(file),old=document.getElementById(id),img=document.createElement('img');img.src=url;img.alt='Your selected memory photo';img.className='photo';img.onload=()=>URL.revokeObjectURL(url);old.replaceWith(img);img.id=id;}
+let noClicks=0;function notYet(){noClicks++;const yes=document.getElementById('yesBtn'),no=document.getElementById('noBtn');yes.style.setProperty('--scale',Math.min(1+noClicks*.22,2.35));yes.style.padding=`${14+noClicks*2}px ${22+noClicks*4}px`;const msgs=['Are you sure? My teddy is still crying 🥺','Sending extra virtual hugs… please? 🧸','My sorry button is getting bigger because I mean it 💗','One tiny chance? I promise to listen 🥹'];no.textContent=noClicks>=5?'I understand. Take your time 💗':msgs[noClicks-1];}
+function forgive(){document.getElementById('response').classList.remove('hidden');document.getElementById('yesBtn').textContent='Thank you for hearing me 💗';document.getElementById('noBtn').classList.add('hidden');}
+</script></body></html>
